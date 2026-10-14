@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Platty Docs</title>
+  <meta name="description" content="Install Platty, connect to your first server and learn the keychain, vault, SFTP, port forwarding and terminal features.">
+  <link rel="icon" href="../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container">
+      <a class="brand" href="../"><img src="../assets/sol-256.png" alt="">Platty</a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="../#features">Features</a>
+        <a href="./">Docs</a>
+        <a href="https://github.com/PlattySSH/platty">GitHub</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="https://github.com/PlattySSH/platty/releases">Download</a>
+    </div>
+  </header>
+
+  <div class="container docs">
+    <nav class="docs-nav" aria-label="Documentation">
+      <p>Start</p>
+      <a href="#install">Install</a>
+      <a href="#first-connection">Your first connection</a>
+      <p>Guides</p>
+      <a href="#keys">Keys and certificates</a>
+      <a href="#security">Vault and security</a>
+      <a href="#sftp">SFTP</a>
+      <a href="#forwarding">Port forwarding</a>
+      <a href="#terminal">Terminal</a>
+      <p>Reference</p>
+      <a href="#shortcuts">Keyboard shortcuts</a>
+      <a href="#build">Build from source</a>
+    </nav>
+
+    <article class="prose">
+      <h1>Platty documentation</h1>
+      <p>Everything you need to get from download to a working setup. Platty is in beta; these docs grow with it.</p>
+
+      <h2 id="install">Install</h2>
+      <p>Platty runs on Windows 10 (1809 or later) and Windows 11. Download the latest build from <a href="https://github.com/PlattySSH/platty/releases">Releases</a>:</p>
+      <ul>
+        <li><strong>Installer</strong> (<code>platty-x.y.z-setup.exe</code>): installs for your user only, without administrator rights, and adds Platty to the Start menu.</li>
+        <li><strong>Portable</strong> (<code>platty-x.y.z-windows-amd64.zip</code>): unzip anywhere and run <code>platty.exe</code>.</li>
+      </ul>
+      <p class="note">Beta builds aren't code-signed yet. If SmartScreen stops the download or the first launch, choose <em>More info → Run anyway</em>.</p>
+      <p>The first time you open Platty, Sol walks you through the theme, the terminal, an optional master password and importing your servers.</p>
+
+      <h2 id="first-connection">Your first connection</h2>
+      <ol>
+        <li>Click <strong>New host</strong> on the home screen, or press <kbd>Ctrl+Shift+N</kbd>.</li>
+        <li>Type the address, the port if it isn't 22, and the user name.</li>
+        <li>Pick how to sign in: a password, a key from the keychain, or the Windows SSH agent.</li>
+        <li>Click <strong>Save and connect</strong>. The first time, Platty shows the server's fingerprint so you can check it before trusting it.</li>
+      </ol>
+      <p>Already use OpenSSH? Choose <strong>Import ~/.ssh/config</strong> from the hosts menu (<strong>⋯</strong>) and your hosts, users, ports, keys and jump hosts come along. For a one-off connection, press <kbd>Ctrl+Shift+P</kbd> and type <code>user@host</code>.</p>
+
+      <h2 id="keys">Keys and certificates</h2>
+      <p>Open the keychain with <kbd>Alt+2</kbd>.</p>
+      <ul>
+        <li><strong>Generate</strong> an ed25519 key, with or without a passphrase. Copy the public key into <code>~/.ssh/authorized_keys</code> on your servers.</li>
+        <li><strong>Import</strong> an existing private key. If a <code>-cert.pub</code> file sits next to it, the certificate is attached too.</li>
+        <li><strong>Attach a certificate</strong> from the key's menu to sign in with keys signed by your organization's CA.</li>
+      </ul>
+      <p>Passphrases are asked for the first time a key is used and kept in memory until you quit or lock Platty. Tick <em>Remember it in the vault</em> to store one.</p>
+      <h3>Hardware keys</h3>
+      <p>YubiKeys and other FIDO keys work through the Windows OpenSSH agent: load the key with <code>ssh-add</code> and pick the <strong>Agent</strong> sign-in method for the host.</p>
+      <h3>Agent forwarding</h3>
+      <p>Turn on <em>Forward my SSH agent</em> in a host's advanced options to use your local keys from that server, for example to <code>git pull</code> there. Only do it for servers you trust.</p>
+
+      <h2 id="security">Vault and security</h2>
+      <p>Hosts, keys, passwords, rules and snippets live in an encrypted vault in <code>%AppData%\Platty</code>. The data is sealed with XChaCha20-Poly1305 and a random vault key, which is protected in one or both of these ways:</p>
+      <ul>
+        <li><strong>Your Windows user</strong> (DPAPI): the vault opens on its own on this PC.</li>
+        <li><strong>A master password</strong> (Argon2id): set it in <strong>Settings → Security</strong>.</li>
+      </ul>
+      <p>With a master password you can turn off <em>Unlock with Windows</em>, so not even other programs running as you can open the vault. Lock Platty with <kbd>Ctrl+Shift+L</kbd>, or let it lock itself after a period of inactivity.</p>
+      <h3>Backups and moving to another PC</h3>
+      <p><strong>Settings → Data → Export</strong> writes a <code>.platty</code> file protected by a password of your choice. Passwords and saved passphrases are left out unless you include them. Importing never deletes anything and never replaces a host key you already trust.</p>
+
+      <h2 id="sftp">SFTP</h2>
+      <p>Open the SFTP panel with <kbd>Alt+6</kbd> while an SSH session is active.</p>
+      <ul>
+        <li>Drag files or folders from Explorer onto a session to upload them, or drag an entry from the panel out to Explorer.</li>
+        <li>Choose <strong>Edit</strong> on a file to open it in its default app; every time you save, Platty uploads it back.</li>
+        <li>The transfer queue at the bottom shows progress and lets you cancel.</li>
+      </ul>
+      <h3>Follow the terminal's folder</h3>
+      <p>If your shell reports its working folder (OSC 7), the panel opens there and a button takes you back to it. For bash, add this to <code>~/.bashrc</code> on the server:</p>
+<pre><code>__platty_osc7() {
+  local LC_ALL=C path="" ch i
+  for (( i = 0; i &lt; ${#PWD}; i++ )); do
+    ch=${PWD:i:1}
+    case $ch in
+      [A-Za-z0-9/._~-]) path+=$ch ;;
+      *) printf -v ch '%%%02X' "'$ch"; path+=$ch ;;
+    esac
+  done
+  printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$path"
+}
+[[ $- == *i* &amp;&amp; $PROMPT_COMMAND != *__platty_osc7* ]] &amp;&amp; PROMPT_COMMAND="__platty_osc7${PROMPT_COMMAND:+;$PROMPT_COMMAND}"</code></pre>
+
+      <h2 id="forwarding">Port forwarding</h2>
+      <p>Create rules in the port forwarding panel (<kbd>Alt+3</kbd>). Each rule runs over its own connection and has a switch to start or stop it.</p>
+      <table>
+        <thead><tr><th>Type</th><th>What it does</th><th>OpenSSH</th></tr></thead>
+        <tbody>
+          <tr><td>Local</td><td>Listens on your PC and forwards through the server.</td><td><code>ssh -L</code></td></tr>
+          <tr><td>Remote</td><td>Listens on the server and forwards to something your PC can reach.</td><td><code>ssh -R</code></td></tr>
+          <tr><td>Dynamic</td><td>A local SOCKS5 proxy that goes out through the server.</td><td><code>ssh -D</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="terminal">Terminal</h2>
+      <ul>
+        <li><strong>Tabs</strong> come back when you reopen Platty. Double-click a tab to rename it, drag it to reorder it, or right-click it to duplicate or close it.</li>
+        <li><strong>Split</strong> a tab with <kbd>Ctrl+Shift+D</kbd> or <kbd>Ctrl+Shift+E</kbd>. Right-click a pane and choose <em>Broadcast input to this tab</em> to type into every pane at once.</li>
+        <li><strong>Log to file</strong> from the same menu saves what the session prints, as plain text.</li>
+        <li><strong>Links</strong> open with <kbd>Ctrl</kbd>+click, including OSC 8 hyperlinks. Programs can copy text to your clipboard with OSC 52; Platty tells you when they do.</li>
+        <li><strong>Fonts</strong>: JetBrains Mono, Fira Code or Geist Mono, with ligatures you can turn off in <strong>Settings → Terminal</strong>.</li>
+        <li><strong>On connect</strong>: give a host a command to run as soon as the shell opens, such as <code>tmux attach</code>.</li>
+      </ul>
+
+      <h2 id="shortcuts">Keyboard shortcuts</h2>
+      <table>
+        <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+        <tbody>
+          <tr><td>Search everywhere</td><td><kbd>Ctrl+Shift+P</kbd></td></tr>
+          <tr><td>New terminal / new host</td><td><kbd>Ctrl+Shift+T</kbd> / <kbd>Ctrl+Shift+N</kbd></td></tr>
+          <tr><td>Split right / down</td><td><kbd>Ctrl+Shift+D</kbd> / <kbd>Ctrl+Shift+E</kbd></td></tr>
+          <tr><td>Close pane</td><td><kbd>Ctrl+Shift+W</kbd></td></tr>
+          <tr><td>Move focus between panes</td><td><kbd>Alt+Arrows</kbd></td></tr>
+          <tr><td>Next / previous tab</td><td><kbd>Ctrl+Tab</kbd> / <kbd>Ctrl+Shift+Tab</kbd></td></tr>
+          <tr><td>Sidebar / tool panels</td><td><kbd>Alt+1</kbd> / <kbd>Alt+2</kbd> … <kbd>Alt+6</kbd></td></tr>
+          <tr><td>Copy / paste</td><td><kbd>Ctrl+Shift+C</kbd> / <kbd>Ctrl+Shift+V</kbd></td></tr>
+          <tr><td>Find in terminal</td><td><kbd>Ctrl+Shift+F</kbd></td></tr>
+          <tr><td>Lock Platty</td><td><kbd>Ctrl+Shift+L</kbd></td></tr>
+          <tr><td>Settings</td><td><kbd>Ctrl+Alt+S</kbd></td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="build">Build from source</h2>
+      <p>You need Go 1.26 or later on Windows.</p>
+<pre><code>git clone https://github.com/PlattySSH/platty
+cd platty
+go build -ldflags "-H windowsgui" -o bin/platty.exe ./cmd/platty</code></pre>
+      <p>The <a href="https://github.com/PlattySSH/platty#readme">README</a> covers tests, screenshots and the release script.</p>
+    </article>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <span>© 2026 AlesixDev · MIT License</span>
+      <span class="spacer"></span>
+      <a href="../">Home</a>
+      <a href="https://github.com/PlattySSH/platty/releases">Releases</a>
+      <a href="https://github.com/PlattySSH/platty/blob/main/CHANGELOG.md">Changelog</a>
+      <a href="https://github.com/PlattySSH">GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

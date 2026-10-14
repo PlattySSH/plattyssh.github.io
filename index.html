@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Platty — a fast, native SSH client for Windows</title>
+  <meta name="description" content="Platty is a free, open-source SSH client and terminal for Windows, written in Go and drawn on the GPU. Hosts, keys, tunnels, SFTP and snippets in one calm window.">
+  <meta property="og:title" content="Platty">
+  <meta property="og:description" content="A fast, native SSH client and terminal for Windows.">
+  <meta property="og:image" content="https://plattyssh.github.io/assets/screens/terminal-carbon.png">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container">
+      <a class="brand" href="./"><img src="assets/sol-256.png" alt="">Platty</a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="#features">Features</a>
+        <a href="docs/">Docs</a>
+        <a href="https://github.com/PlattySSH/platty">GitHub</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="https://github.com/PlattySSH/platty/releases">Download</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <img class="hero-sol" src="assets/sol.png" alt="Sol, Platty's mascot">
+        <h1>Every server, one calm window.</h1>
+        <p class="lead">Platty is an SSH client and terminal for Windows, written in Go and drawn on the GPU. Hosts, keys, tunnels, SFTP and snippets live together, encrypted on your PC.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/PlattySSH/platty/releases">Download for Windows</a>
+          <a class="btn btn-outline" href="https://github.com/PlattySSH/platty">View on GitHub</a>
+        </div>
+        <p class="hero-meta">Free and open source · MIT license · Windows 10 and 11</p>
+        <div class="preview">
+          <div class="frame"><img src="assets/screens/terminal-carbon.png" alt="Platty with a terminal session, the hosts sidebar and tabs" width="1440" height="900"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <p class="eyebrow">What's inside</p>
+        <h2>Everything you reach for, without opening a browser.</h2>
+        <p class="sub">No Electron and no web view. Platty starts fast, stays light on memory and feels like a Windows app, because it is one.</p>
+
+        <div class="grid">
+          <article class="card wide">
+            <div class="card-body">
+              <h3>Search Everywhere</h3>
+              <p>Press <kbd>Ctrl+Shift+P</kbd> to jump to any host, snippet or action, or type <code>user@host</code> and connect right away.</p>
+            </div>
+            <div class="shot"><img src="assets/screens/palette-carbon.png" alt="The Search Everywhere palette" loading="lazy"></div>
+          </article>
+          <article class="card wide">
+            <div class="card-body">
+              <h3>Tabs and split panes</h3>
+              <p>They come back when you reopen Platty. Rename, reorder, duplicate, or type into every pane of a tab at once.</p>
+            </div>
+            <div class="shot"><img src="assets/screens/split-midnight.png" alt="Two terminal panes side by side" loading="lazy"></div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3>Keychain</h3>
+              <p>Generate ed25519 keys, import yours, attach SSH certificates. Passphrases stay in memory unless you ask Platty to remember them.</p>
+            </div>
+            <div class="shot"><img src="assets/screens/keychain-graphite.png" alt="The keychain panel" loading="lazy"></div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3>SFTP that keeps up</h3>
+              <p>A transfer queue with progress, whole folders, drag and drop both ways, and remote files you edit in your own editor.</p>
+            </div>
+            <div class="shot"><img src="assets/screens/ssh-sftp-carbon.png" alt="The SFTP panel next to an SSH session" loading="lazy"></div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3>Hosts the way you think</h3>
+              <p>Folders, tags, jump hosts and a command to run on connect. Bring everything over from <code>~/.ssh/config</code>.</p>
+            </div>
+            <div class="shot"><img src="assets/screens/host-editor-carbon.png" alt="The host editor" loading="lazy"></div>
+          </article>
+        </div>
+
+        <div class="list">
+          <div>
+            <h3>A terminal of its own</h3>
+            <p>Truecolor, scrollback search, reflow on resize and a glyph cache that redraws a full 1080p screen in under 6 ms.</p>
+          </div>
+          <div>
+            <h3>Ligatures and emoji</h3>
+            <p>JetBrains Mono, Fira Code and Geist Mono with ligatures, color emoji and system font fallback.</p>
+          </div>
+          <div>
+            <h3>Port forwarding</h3>
+            <p>Local, remote and SOCKS5 tunnels, each behind a switch, with their own connection.</p>
+          </div>
+          <div>
+            <h3>Server metrics</h3>
+            <p>CPU, memory, disk, network, load and uptime at the bottom of every SSH session.</p>
+          </div>
+          <div>
+            <h3>An encrypted vault</h3>
+            <p>XChaCha20-Poly1305, unlocked by Windows, by a master password, or both. Locks when you step away.</p>
+          </div>
+          <div>
+            <h3>Export without leaks</h3>
+            <p>Encrypted <code>.platty</code> backups where secrets stay out unless you add them, plus plain SSH config export.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="open-source">
+      <div class="container">
+        <p class="eyebrow">Open source</p>
+        <h2>Built in the open, piece by piece.</h2>
+        <p class="sub">The parts that make Platty work are small Go libraries you can use in your own projects.</p>
+        <div class="libs">
+          <a class="lib" href="https://github.com/PlattySSH/vt">
+            <code>github.com/plattyssh/vt</code>
+            <p>A VT terminal emulator with no GUI: parser, screen state, reflow and input encoding.</p>
+          </a>
+          <a class="lib" href="https://github.com/PlattySSH/conpty">
+            <code>github.com/plattyssh/conpty</code>
+            <p>Start processes in a Windows pseudo console, with resize and clean shutdown.</p>
+          </a>
+          <a class="lib" href="https://github.com/PlattySSH/glyphs">
+            <code>github.com/plattyssh/glyphs</code>
+            <p>A cached glyph rasterizer with COLR color emoji, font fallback and ligature shaping.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <p class="eyebrow">Questions</p>
+        <h2>Before you download.</h2>
+        <div class="faq">
+          <details>
+            <summary>Is Platty free?</summary>
+            <p>Yes. Platty is open source under the MIT license, with no account and no telemetry.</p>
+          </details>
+          <details>
+            <summary>Where is my data stored?</summary>
+            <p>On your PC only, in <code>%AppData%\Platty</code>. Hosts, keys and passwords are sealed with XChaCha20-Poly1305; the key is protected by your Windows user, by an optional master password, or both.</p>
+          </details>
+          <details>
+            <summary>Why does Windows warn me when I run it?</summary>
+            <p>Beta builds aren't code-signed yet, so SmartScreen may ask you to confirm. Signed releases are on the way.</p>
+          </details>
+          <details>
+            <summary>Does it work with my YubiKey?</summary>
+            <p>Yes, through the Windows OpenSSH agent: add the key with <code>ssh-add</code> and pick the Agent sign-in method for the host.</p>
+          </details>
+          <details>
+            <summary>What about macOS and Linux?</summary>
+            <p>Platty is Windows only for now. The terminal engine and SSH layer are already cross-platform; the rest will follow.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="cta">
+        <div class="cta-text">
+          <h2>Meet Sol, and your servers.</h2>
+          <p>A short introduction sets up your theme, terminal and vault the first time you open Platty.</p>
+          <a class="btn btn-primary" href="https://github.com/PlattySSH/platty/releases">Download for Windows</a>
+        </div>
+        <div class="cta-shot" aria-hidden="true"><img src="assets/screens/intro-carbon.png" alt="" loading="lazy"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span>© 2026 AlesixDev · MIT License</span>
+      <span class="spacer"></span>
+      <a href="docs/">Docs</a>
+      <a href="https://github.com/PlattySSH/platty/releases">Releases</a>
+      <a href="https://github.com/PlattySSH/platty/blob/main/CHANGELOG.md">Changelog</a>
+      <a href="https://github.com/PlattySSH">GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>
